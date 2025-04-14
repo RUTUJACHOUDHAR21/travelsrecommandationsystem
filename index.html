@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Travel Recommendation</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background: #2c3e50;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    main {
+      padding: 2rem;
+      max-width: 600px;
+      margin: auto;
+      text-align: center;
+    }
+
+    select {
+      padding: 0.7rem;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .recommendations {
+      margin-top: 2rem;
+      text-align: left;
+    }
+
+    .card {
+      background: white;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>🌍 Travel Recommendation Hub</h1>
+    <p>Select your travel interest and get suggestions!</p>
+  </header>
+
+  <main>
+    <label for="interest">Choose a type of destination:</label><br><br>
+    <select id="interest" onchange="showRecommendations()">
+      <option value="">-- Select an option --</option>
+      <option value="beach">Beach</option>
+      <option value="adventure">Adventure</option>
+      <option value="nature">Nature</option>
+      <option value="historical">Historical</option>
+    </select>
+
+    <div class="recommendations" id="recommendations"></div>
+  </main>
+
+  <script>
+    const places = {
+      beach: [
+        { name: "Maldives", desc: "Crystal clear water and white sandy beaches." },
+        { name: "Goa, India", desc: "Fun beach parties and water sports." }
+      ],
+      adventure: [
+        { name: "Queenstown, NZ", desc: "Bungee jumping and jet boating capital." },
+        { name: "Rishikesh, India", desc: "River rafting and camping adventures." }
+      ],
+      nature: [
+        { name: "Swiss Alps", desc: "Breathtaking mountains and nature trails." },
+        { name: "Sundarbans, India", desc: "Dense mangrove forests and wildlife." }
+      ],
+      historical: [
+        { name: "Rome, Italy", desc: "Ancient ruins and historical landmarks." },
+        { name: "Hampi, India", desc: "Temples and monuments from the Vijayanagara Empire." }
+      ]
+    };
+
+    function showRecommendations() {
+      const interest = document.getElementById("interest").value;
+      const container = document.getElementById("recommendations");
+      container.innerHTML = "";
+
+      if (places[interest]) {
+        places[interest].forEach(place => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `<h3>${place.name}</h3><p>${place.desc}</p>`;
+          container.appendChild(card);
+        });
+      }
+    }
+  </script>
+
+</body>
+</html>
